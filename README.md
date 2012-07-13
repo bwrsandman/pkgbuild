@@ -5,11 +5,13 @@ See [https://wiki.archlinux.org/index.php/Pkgbuild][https://wiki.archlinux.org/i
  
 ##Contents:
  
-- openmw: Standard releases.
-- openmw-git: Developement releases.
+- [openmw]: Standard releases.
+- [openmw-git]: Developement releases.
  
 ##Website:
 [http://www.openmw.org][http://www.openmw.org]
  
 [http://www.openmw.org]: http://www.openmw.org
 [https://wiki.archlinux.org/index.php/Pkgbuild]: https://wiki.archlinux.org/index.php/Pkgbuild
+[openmw]: https://aur.archlinux.org/packages.php?ID=21419
+[openmw-git]: https://aur.archlinux.org/packages.php?ID=45102
