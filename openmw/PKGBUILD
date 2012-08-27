@@ -13,13 +13,13 @@ depends=('openal' 'ogre>=1.8.0-3' 'mygui>=3.2.0-2' 'bullet>=2.8.0' 'mpg123' 'lib
 
 makedepends=('cmake' 'boost>=1.5.0')
 
-source=(http://openmw.googlecode.com/files/$pkgname-$pkgver-source.tar.bz2)
+source=(http://openmw.googlecode.com/files/$pkgname-$pkgver-source.tar.gz)
 sha1sums=('7ad150a38f9a0a94c6de2d1e3f50e6cc0586fb6c')
 
 conflicts=('openmw-git')
 
 build() {
-  cd "$srcdir"/"$pkgname"-"$pkgver"-source
+  cd "$srcdir"/"$pkgname"-"$pkgver"
 
   cmake -DCMAKE_INSTALL_PREFIX=/usr \
         -DCMAKE_BUILD_TYPE=RelWithDebInfo
