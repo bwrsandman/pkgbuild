@@ -22,7 +22,7 @@ conflicts=('openmw-git')
 
 build() {
   cd "$srcdir"/zinnschlag-openmw-b5e8162
-  cp -r ../scrawl-shiny-4750676/* extern/
+  cp -r ../scrawl-shiny-4750676/* extern/shiny
 
   cmake -DCMAKE_INSTALL_PREFIX=/usr \
         -DCMAKE_BUILD_TYPE=RelWithDebInfo
