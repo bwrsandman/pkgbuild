@@ -10,7 +10,7 @@ url="http://www.openmw.org"
 license=('GPL3')
 _shinyver=4750676ac46a7aaa86bca53dc68c5a1ba11f3bc1
 
-depends=('openal' 'ogre=1.8.1' 'mygui>=3.2.0-2' 'bullet>=2.8.0' 'mpg123' 'libsndfile' 'qt')
+depends=('openal' 'ogre>=1.8.1' 'mygui>=3.2.0-2' 'bullet>=2.8.0' 'mpg123' 'libsndfile' 'qt')
 
 makedepends=('cmake' 'boost>=1.5.0')
 
