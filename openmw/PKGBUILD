@@ -8,7 +8,6 @@ pkgdesc="An open-source engine reimplementation for the role-playing game Morrow
 arch=('i686' 'x86_64')
 url="http://www.openmw.org"
 license=('GPL3')
-_shinyver=4750676ac46a7aaa86bca53dc68c5a1ba11f3bc1
 
 depends=('openal' 'ogre>=1.8.1' 'mygui>=3.2.0-2' 'bullet>=2.8.0' 'mpg123' 'libsndfile' 'qt')
 
