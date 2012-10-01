@@ -13,7 +13,7 @@ depends=('openal' 'ogre>=1.8.1' 'mygui>=3.2.0-2' 'bullet>=2.8.0' 'mpg123' 'libsn
 
 makedepends=('cmake' 'boost>=1.5.0')
 
-source=(http://openmw.googlecode.com/files/$pkgname-$pkgver-source.tar.gz")
+source=(http://openmw.googlecode.com/files/$pkgname-$pkgver-source.tar.gz)
 sha1sums=('839c3e2db69dead0ae5c8e0ae0b4295faa9e9169')
 
 conflicts=('openmw-git')
