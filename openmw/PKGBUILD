@@ -3,7 +3,7 @@
 
 pkgname=openmw
 pkgver=0.18.0
-pkgrel=1
+pkgrel=2
 pkgdesc="An open-source engine reimplementation for the role-playing game Morrowind."
 arch=('i686' 'x86_64')
 url="http://www.openmw.org"
@@ -14,15 +14,13 @@ depends=('openal' 'ogre>=1.8.1' 'mygui>=3.2.0-2' 'bullet>=2.8.0' 'mpg123' 'libsn
 
 makedepends=('cmake' 'boost>=1.5.0')
 
-source=(http://openmw.googlecode.com/files/$pkgname-$pkgver.tar.gz shiny.zip::https://github.com/scrawl/shiny/zipball/"$
-_shinyver")
-sha1sums=('a889aa1d1c9a909589b10e0071fa3b06369dbf2f' '5a85af4080aed1312f0e7fe3cde3834110c7fd4c')
+source=(http://openmw.googlecode.com/files/$pkgname-$pkgver-source.tar.gz")
+sha1sums=('839c3e2db69dead0ae5c8e0ae0b4295faa9e9169')
 
 conflicts=('openmw-git')
 
 build() {
-  cd "$srcdir"/zinnschlag-openmw-b5e8162
-  cp -r ../scrawl-shiny-4750676/* extern/shiny
+  cd "$srcdir"/"$pkgname"-"$pkgver"
 
   cmake -DCMAKE_INSTALL_PREFIX=/usr \
         -DCMAKE_BUILD_TYPE=RelWithDebInfo
