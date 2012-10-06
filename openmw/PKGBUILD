@@ -9,17 +9,17 @@ arch=('i686' 'x86_64')
 url="http://www.openmw.org"
 license=('GPL3')
 
-depends=('openal' 'ogre>=1.8.1' 'mygui>=3.2.0-2' 'bullet>=2.8.0' 'mpg123' 'libsndfile' 'qt')
+depends=('openal' 'ogre>=1.8.0-3' 'mygui>=3.2.0-2' 'bullet>=2.8.0' 'mpg123' 'libsndfile' 'qt')
 
 makedepends=('cmake' 'boost>=1.5.0')
 
-source=(http://openmw.googlecode.com/files/$pkgname-$pkgver-source.tar.gz)
-sha1sums=('839c3e2db69dead0ae5c8e0ae0b4295faa9e9169')
+source=(http://openmw.googlecode.com/files/${pkgname}_${pkgver}.orig.tar.bz2)
+sha1sums=('d213223dc51f7516e81bcdff89890f889fa4210e')
 
 conflicts=('openmw-git')
 
 build() {
-  cd "$srcdir"/"$pkgname"-"$pkgver"
+  cd "${srcdir}/${pkgname}-${pkgver}"
 
   cmake -DCMAKE_INSTALL_PREFIX=/usr \
         -DCMAKE_BUILD_TYPE=RelWithDebInfo
