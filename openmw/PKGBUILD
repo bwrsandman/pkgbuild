@@ -40,7 +40,6 @@ build() {
 
   install -d -m755 "$pkgdir"/etc/openmw
   install -m644 openmw.cfg "$pkgdir"/etc/openmw/
-  install -m644 launcher.cfg "$pkgdir"/etc/openmw/
   install -m644 settings-default.cfg "$pkgdir"/etc/openmw/
   install -m644 transparency-overrides.cfg "$pkgdir"/etc/openmw/
 
