@@ -7,7 +7,7 @@ pkgrel=2
 pkgdesc="An open-source engine reimplementation for the role-playing game Morrowind."
 arch=('i686' 'x86_64')
 url="http://www.openmw.org"
-license=('GPL3')
+license=('GPL3' 'custom:Bitstream Vera' 'custom:Daedric Font' 'custom:OFL' 'custom:shiny')
 
 depends=('openal' 'ogre>=1.8.0-3' 'mygui>=3.2.0-2' 'bullet>=2.8.0' 'mpg123' 'libsndfile' 'qt')
 
@@ -24,9 +24,9 @@ build() {
   cmake -DCMAKE_INSTALL_PREFIX=/usr \
         -DCMAKE_BUILD_TYPE=RelWithDebInfo
   make -j`getconf _NPROCESSORS_ONLN`
+}
 
-  # Install
-  # There is currently no make install so we do this manually
+package() {
 
   # Binaries
   install -d -m755 "$pkgdir"/usr/bin
@@ -54,4 +54,12 @@ build() {
   install -d -m755 "$pkgdir"/usr/share/games/openmw
   cp -r resources "$pkgdir"/usr/share/games/openmw/ || exit 1
   install -m644 launcher.qss "$pkgdir"/usr/share/games/openmw/resources
+
+  # Custom Licences
+  install -d -m755 "$pkgdir"/usr/share/licenses/openmw
+  install -D -m644 "Bitstream Vera License.txt" "$pkgdir/usr/share/licenses/openmw/"
+  install -D -m644 "Daedric Font License.txt" "$pkgdir/usr/share/licenses/openmw/"
+  install -D -m644 "OFL.txt" "$pkgdir/usr/share/licenses/openmw/"
+  install -D -m644 "extern/shiny/License.txt" "$pkgdir/usr/share/licenses/openmw/Shiny License.txt"
+
 }
