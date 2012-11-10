@@ -2,8 +2,8 @@
 # PKGBUILD source: https://github.com/bwrsandman/pkgbuild/tree/master/openmw
 
 pkgname=openmw
-pkgver=0.18.0
-pkgrel=2
+pkgver=0.19.0
+pkgrel=1
 pkgdesc="An open-source engine reimplementation for the role-playing game Morrowind."
 arch=('i686' 'x86_64')
 url="http://www.openmw.org"
@@ -14,7 +14,7 @@ depends=('openal' 'ogre>=1.8.0-3' 'mygui>=3.2.0-2' 'bullet>=2.8.0' 'mpg123' 'lib
 makedepends=('cmake' 'boost>=1.5.0')
 
 source=(http://openmw.googlecode.com/files/${pkgname}_${pkgver}.orig.tar.bz2)
-sha1sums=('d213223dc51f7516e81bcdff89890f889fa4210e')
+sha1sums=('a0fc4c471ab22f09902759709ccfcac8ea94989f')
 
 conflicts=('openmw-git')
 
@@ -27,7 +27,7 @@ build() {
 }
 
 package() {
-
+  cd "${srcdir}/${pkgname}-${pkgver}"
   # Binaries
   install -d -m755 "$pkgdir"/usr/bin
   install -m755 openmw "$pkgdir"/usr/bin/
