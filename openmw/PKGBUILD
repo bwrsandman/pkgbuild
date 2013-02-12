@@ -9,9 +9,9 @@ arch=('i686' 'x86_64')
 url="http://www.openmw.org"
 license=('GPL3' 'custom')
 
-depends=('openal' 'ogre>=1.8.0-3' 'mygui>=3.2.0-2' 'bullet>=2.8.0' 'mpg123' 'libsndfile' 'qt')
+depends=('openal' 'ogre' 'mygui' 'bullet' 'mpg123' 'libsndfile' 'qt' 'ffmpeg')
 
-makedepends=('cmake' 'boost>=1.5.0')
+makedepends=('cmake' 'boost')
 
 source=(http://openmw.googlecode.com/files/${pkgname}_${pkgver}.orig.tar.bz2)
 sha1sums=('d0c0b867fcc051a2cb26aeb7b3585328f7777c3b')
