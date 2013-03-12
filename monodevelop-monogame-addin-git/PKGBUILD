@@ -1,7 +1,7 @@
 pkgname=monodevelop-monogame-addin-git
 pkgver=20130312
 pkgrel=1
-pkgdesc="Monogame Addin for Monodevelop"
+pkgdesc="C# Project and File Templates for Monogame"
 arch=(any)
 license=("Microsoft Public License")
 depends=(mono 'monogame>=3.0.1')
