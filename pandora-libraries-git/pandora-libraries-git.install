@@ -32,5 +32,9 @@ post_install() {
    echo "    /bin/rm /dev/loop*"
    echo ""
 
+   echo "Enable auto-discovery mechanism and integrating PXML.xml dir-apps and .pnd by running:"
+   echo "    # systemctl enable pndnotifyd.service"
+   echo ""
+
    exit 0
 }
