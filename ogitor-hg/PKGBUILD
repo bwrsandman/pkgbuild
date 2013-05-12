@@ -1,4 +1,4 @@
-# Maintainer: shua <shualloret @ gmail . com>
+# Maintainer: bwrsandman <bwrsandman@gmail.com>
 pkgname=ogitor-hg
 _hgroot="https://bitbucket.org/jacmoe/ogitor"
 _hgrepo="ogitor"
@@ -8,7 +8,7 @@ pkgdesc="Scene editing framework for Ogre3D"
 arch=('i686' 'x86_64')
 url='http://www.ogitor.org'
 license=('LGPL')
-depends=('ogre' 'qt4')
+depends=('ogre>=1.9' 'qt4')
 makedepends=('cmake' 'mercurial' 'unzip')
 conflicts=('ogitor')
 provides=('ogitor')
