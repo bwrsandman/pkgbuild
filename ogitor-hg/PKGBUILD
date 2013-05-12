@@ -1,12 +1,12 @@
 # Maintainer: shua <shualloret @ gmail . com>
 pkgname=ogitor-hg
-pkgver=20130226
+pkgver=20130511
 pkgrel=1
 pkgdesc="scene editing framework for Ogre3D"
 arch=('i686' 'x86_64')
 url='http://www.ogitor.org'
 license=('LGPL')
-depends=('ogre' 'qt')
+depends=('ogre' 'qt4')
 makedepends=('cmake' 'mercurial' 'unzip')
 conflicts=('ogitor')
 provides=('ogitor')
