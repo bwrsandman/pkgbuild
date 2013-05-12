@@ -22,9 +22,9 @@ build() {
   cd ${srcdir}
 
   if [ -d $_hgrepo/.hg ]; then
-    cd $_hgrepo && hg pull -u || return 1
+    cd $_hgrepo && hg pull -u 
   else
-    hg clone $_hgroot $_hgrepo || return 1
+    hg clone $_hgroot $_hgrepo 
   fi
 
   msg "Mercurial checkout done or server timeout"
@@ -41,8 +41,8 @@ build() {
   unzip -d RunPath ${srcdir}/projects.zip
 
   cmake . -DCMAKE_INSTALL_PREFIX=/usr
-  make || return 1
-  make DESTDIR=${pkgdir} install || return 1
+  make 
+  make DESTDIR=${pkgdir} install 
 
   rm -rf ${srcdir}/$_hgrepo-build
 }
