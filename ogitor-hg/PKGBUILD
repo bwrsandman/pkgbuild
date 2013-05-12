@@ -42,7 +42,8 @@ build() {
 
   cmake . -DCMAKE_INSTALL_PREFIX=/usr
   make 
-  make DESTDIR=${pkgdir} install 
+}
 
-  rm -rf ${srcdir}/$_hgrepo-build
+package() {
+  make DESTDIR=${pkgdir} install 
 }
