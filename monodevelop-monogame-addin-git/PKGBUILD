@@ -1,5 +1,5 @@
 pkgname=monodevelop-monogame-addin-git
-pkgver=20130422
+pkgver=20130516
 pkgrel=1
 pkgdesc="MonoDevelop Project and File Templates for Monogame"
 arch=(any)
@@ -9,28 +9,21 @@ makedepends=(mono nant git)
 options=(!strip)
 url="http://addins.monodevelop.com/Project/Index/47"
 
-_gitroot="git://github.com/dellis1972/MonoGameMonoDevelopAddin.git"
-_gitname="MonoGameMonoDevelopAddin"
+source=("git://github.com/dellis1972/MonoGameMonoDevelopAddin.git")
+sha1sums=('SKIP')
 
+pkgver() {
+  cd "$srcdir/$_gitname"
+  git log -1 --format="%cd" --date=short | tr -d '-'
+}
 
 build() {
-  msg "Connecting to GIT server...."
-
-  cd "$srcdir"
-  if [ -d "$_gitname" ] ; then
-    cd "$_gitname" && git pull origin
-    msg "The local files are updated."
-  else
-    git clone --depth=1 "$_gitroot" "$_gitname"
-    cd "$_gitname"
-  fi
-  msg "GIT checkout done or server timeout"
-
+  cd "$srcdir"/MonoGameMonoDevelopAddin
   xbuild XamarinStudio.MonoGame.sln
 }
 
 package() {
-  cd "$srcdir/$_gitname"
+  cd "$srcdir"/MonoGameMonoDevelopAddin
   install -d -m755 "$pkgdir"/usr/lib/monodevelop/AddIns/MonoGame
   cp -r MonoDevelop.MonoGame/bin/XamarinRelease/* "$pkgdir"/usr/lib/monodevelop/AddIns/MonoGame
 }
