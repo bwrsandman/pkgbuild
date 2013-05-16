@@ -11,7 +11,8 @@ license=('LGPL')
 source=('git://git.openpandora.org/pandora-libraries.git' 'pndnotifyd.service')
 md5sums=('SKIP' '70f7021fb1adcae8f5f7bdcb451fe192')
 depends=('sdl' 'sdl_ttf' 'sdl_gfx' 'sdl_image' 'cdrkit' 'pandora-misc-git')
-optdepends=('zenity: needed for some pnd applications')
+optdepends=('zenity: needed for some pnd applications'
+            'sdl_mixer: dinksmallwood.pnd')
 makedepends=('git')
 install='pandora-libraries-git.install'
 
