@@ -1,10 +1,10 @@
 pkgname=monodevelop-monogame-addin-git
-pkgver=20130516
+pkgver=20130303
 pkgrel=1
 pkgdesc="MonoDevelop Project and File Templates for Monogame"
 arch=(any)
 license=("Microsoft Public License")
-depends=(mono 'monogame>=3.0.1')
+depends=(mono monodevelop 'monogame>=3.0.1')
 makedepends=(mono nant git)
 options=(!strip)
 url="http://addins.monodevelop.com/Project/Index/47"
@@ -13,7 +13,7 @@ source=("git://github.com/dellis1972/MonoGameMonoDevelopAddin.git")
 sha1sums=('SKIP')
 
 pkgver() {
-  cd "$srcdir/$_gitname"
+  cd "$srcdir"/MonoGameMonoDevelopAddin
   git log -1 --format="%cd" --date=short | tr -d '-'
 }
 
