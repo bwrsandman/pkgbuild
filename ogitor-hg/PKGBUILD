@@ -4,7 +4,7 @@
 pkgname=ogitor-hg
 _hgroot="https://bitbucket.org/jacmoe/ogitor"
 _hgrepo="ogitor"
-pkgver=725.92fddb6edf3b
+pkgver=733.933dd78bfdf0
 pkgrel=1
 pkgdesc="Scene editing framework for Ogre3D"
 arch=('i686' 'x86_64')
@@ -31,6 +31,8 @@ prepare() {
   # line 63 causes an error
   sed -i '63d' Dependencies/SkyX/CMakeLists.txt
   patch -uN CMakeLists.txt ${srcdir}/boost-prefix-fix.patch
+  # replacing ${Boost_LIBRARIES}
+  sed -i 's,TARGET_LINK_LIBRARIES(qtOfs optimized ${Boost_LIBRARIES}),TARGET_LINK_LIBRARIES(qtOfs optimized ${Boost_FILESYSTEM_LIBRARY} ${Boost_SYSTEM_LIBRARY} ${Boost_REGEX_LIBRARY}),' qtOfs/CMakeLists.txt
 }
 
 pkgver() {
