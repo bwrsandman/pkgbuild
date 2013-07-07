@@ -1,84 +1,69 @@
-# Maintainer:  Jerome Rose <jrose.pub@gmail.com>
-# Contributor: Duong Pham <dthpham@gmail.com>
-#~ 
-#~ Exerpt from OgreMeshy COMPLILING.txt
-#~ 
-#~ Long story short:
-#~ -----------------
-#~ cd scripts/Resources
-#~ sh copyresources.sh
-#~ # CMake here to %OgreMeshyFolder%/build
-#~ cd ../../build
-#~ make all
-#~ cp OgreMeshy ../bin/Release_Linux/OgreMeshy
-#~ # Copy plugins plugins either from /usr/local/lib/OGRE or /usr/lib/OGRE to bin/Release_Linux/Plugins:
-#~ cd ../bin/Release_Linux
-#~ make install
+# Maintainer: Sandy Carter <bwrsandman@gmail.com>
+# PKGBUILD source: https://github.com/bwrsandman/pkgbuild/tree/master/ogremeshy
 
 pkgname=ogremeshy
 pkgver=1.4
-pkgrel=2
+pkgrel=3
 pkgdesc="A tool for viewing OGRE mesh files"
 arch=('i686' 'x86_64')
 url="http://sourceforge.net/projects/ogremeshy/"
 license=('GPL3')
+
 depends=('ogre>=1.7.3' 'wxgtk>=2.8')
 makedepends=('cmake>=2.6.4')
-install=$pkgname.install
+
 source=(http://sourceforge.net/projects/$pkgname/files/OgreMeshy.$pkgver.src.tar.bz2
         ogremeshy.desktop) 
 md5sums=('cc6ecf96f19a6f41a90fc3f35707b331'
          'a8ec805fc905323d24532d841b442c1c')
 
 prepare() {
+  cd "${srcdir}"/OgreMeshy
+
+  # tell OgreMeshy where to find the OGRE plugins
+  sed -i "s/PluginFolder=\/opt\/ogremeshy\/Plugins/PluginFolder=\/usr\/lib\/OGRE/g" bin/Release_Linux/Plugins.cfg
+
   sed -i '58 i \
-	find_package(Boost COMPONENTS system filesystem)' "${srcdir}"/OgreMeshy/CMakeLists.txt
+	find_package(Boost COMPONENTS system filesystem)' CMakeLists.txt
   sed -i '59 i \
-	include_directories(${Boost_INCLUDE_DIR})' "${srcdir}"/OgreMeshy/CMakeLists.txt
+	include_directories(${Boost_INCLUDE_DIR})' CMakeLists.txt
   sed -i '60 i \
-	set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Boost_LIBRARIES})' "${srcdir}"/OgreMeshy/CMakeLists.txt
+	set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Boost_LIBRARIES})' CMakeLists.txt
   sed -i '107 i \
-	TARGET_LINK_LIBRARIES( OgreMeshy ${OGRE_LIBRARIES} )' "${srcdir}"/OgreMeshy/CMakeLists.txt
+	TARGET_LINK_LIBRARIES( OgreMeshy ${OGRE_LIBRARIES} )' CMakeLists.txt
+  sed -i '/^\tm_configDirectory = std::string/a mkdir(m_configDirectory.c_str(), 0755);' \
+        src/Core/wxOgreMeshViewerMainFrameImpl.cpp
 }
 
 build() {
-  cd "$srcdir"
-  
-  cd "$srcdir"/OgreMeshy/scripts/Resources
-  sh copyresources.sh
-  
-  mkdir -p "$srcdir"/OgreMeshy/build
-  cd "$srcdir"/OgreMeshy/build
-  cmake ..
-  
-  make || return 1
+  cd "$srcdir"/OgreMeshy
+  cmake -DCMAKE_INSTALL_PREFIX="/opt/$pkgname"
+  make 
 }
 
 package() {
-  
   cd "$srcdir"/OgreMeshy
-  
-  #copy executable
-  cp build/OgreMeshy bin/Release_Linux
+  make DESTDIR="${pkgdir}" install
 
-  #tell OgreMeshy where to find the OGRE plugins
-  cd bin/Release_Linux
-  sed -i "s/PluginFolder=\/opt\/ogremeshy\/Plugins/PluginFolder=\/usr\/lib\/OGRE/g" Plugins.cfg
+  # Use a startup script to force launching in /opt/$pkgname
+  install -d "$pkgdir/usr/bin/"
+  echo \
+"#!/bin/sh
+cd /opt/\"$pkgname\"
+exec ./OgreMeshy" > "$pkgdir/usr/bin/$pkgname"
+  chmod a+x "$pkgdir/usr/bin/$pkgname"
   
-  #copy files to package directory
-  install -d "$pkgdir/opt/$pkgname"
-  cp OgreMeshy "$pkgdir/opt/$pkgname"
-  cp Plugins.cfg "$pkgdir/opt/$pkgname"
-  cp -R Resources "$pkgdir/opt/$pkgname"
-  cp -R Plugins "$pkgdir/opt/$pkgname"
+  # Install resources
+  install -d "$pkgdir/opt/$pkgname"/Resources
+
+  cp bin/Release_Linux/Plugins.cfg "$pkgdir/opt/$pkgname"
+
+  cp -r scripts/Resources/{Icons,Fonts} "$pkgdir/opt/$pkgname"/Resources
+  cp -r scripts/Resources/Other    "$pkgdir/opt/$pkgname"/Resources/Models
+
+  cp scripts/Resources/Blender/Axis.{material,mesh} "$pkgdir/opt/$pkgname"/Resources/Models
+  cp scripts/Resources/Blender/Bones/{BoneMesh.material,Bones.png,BoneTip.mesh,BoneGlobe.mesh} "$pkgdir/opt/$pkgname"/Resources/Models
+
   install -d "$pkgdir/usr/share/applications"
-  cp "$srcdir/../ogremeshy.desktop" "$pkgdir/usr/share/applications"
-
-  #use a startup script ogremeshy.sh to force launching in /opt/$pkgname
-  touch "$pkgdir/opt/$pkgname/$pkgname.sh"
-  echo "#!/bin/sh" > "$pkgdir/opt/$pkgname/$pkgname.sh"
-  echo "cd /opt/$pkgname" >> "$pkgdir/opt/$pkgname/$pkgname.sh"
-  echo "exec ./OgreMeshy" >> "$pkgdir/opt/$pkgname/$pkgname.sh"
-  chmod +x "$pkgdir/opt/$pkgname/$pkgname.sh"
-  
+  cp "$srcdir/ogremeshy.desktop" "$pkgdir/usr/share/applications"
 }
