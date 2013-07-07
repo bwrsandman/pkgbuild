@@ -18,7 +18,7 @@ source=(http://sourceforge.net/projects/$pkgname/files/OgreMeshy.$pkgver.src.tar
         install_resources.patch)
 sha1sums=('11fa0a1f6cd770d22f0ee0dd637985255f02927b'
           '4441f9aed2fb728ef3788023c90cc7a35ce753c9'
-	  '4d3a077fe6754c9cdc34f151a880844f710024b4'
+	  'c369143fdad07c632e00935f246761454065ce8e'
 	  'fb81a98785232a85b9efad151e11751d542c9ca7')
 
 prepare() {
