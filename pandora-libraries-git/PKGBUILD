@@ -2,7 +2,7 @@
 
 pkgname=pandora-libraries-git
 _gitname="pandora-libraries"
-pkgver=20130509
+pkgver=20130612
 pkgrel=1
 pkgdesc="Basic collection of functions and tools to make working Pandora-specific operations easier."
 url="http://openpandora.org/"
@@ -21,14 +21,20 @@ pkgver() {
     git log -1 --format="%cd" --date=short | tr -d '-'
 }
 
+prepare() {
+    cd "$srcdir/$_gitname"
+    sed -i "s,cp libpnd\* deployment/usr/lib,cp -P libpnd\* deployment/usr/lib," Makefile
+}
+
 build() {
   cd "$srcdir/$_gitname"
   make
-  make deploy
 }
 
 package() {
   cd "$srcdir/$_gitname"
+
+  make deploy
 
   install -d -m755 "$pkgdir"/usr/
   cp -r {deployment,"$pkgdir"}/usr/bin
