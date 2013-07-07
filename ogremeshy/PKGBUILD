@@ -24,7 +24,6 @@ sha1sums=('11fa0a1f6cd770d22f0ee0dd637985255f02927b'
 prepare() {
   cd "${srcdir}"/OgreMeshy
 
-  mv CMakeLists{.old.1.8,}.txt
   cp "${srcdir}"/ogremeshy.desktop bin/Release_Linux
 
   # Tell OgreMeshy where to find the OGRE plugins
