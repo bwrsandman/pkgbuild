@@ -48,8 +48,8 @@ package() {
   # Use a startup script to force launching in /opt/$pkgname
   install -d "$pkgdir/usr/bin/"
   echo \
-"#!/bin/sh
+"#!/bin/bash
 cd /opt/\"$pkgname\"
-exec ./OgreMeshy" > "$pkgdir/usr/bin/$pkgname"
+exec ./OgreMeshy \"@\"" > "$pkgdir/usr/bin/$pkgname"
   chmod a+x "$pkgdir/usr/bin/$pkgname"
 }
