@@ -2,26 +2,29 @@
 # PKGBUILD source: https://github.com/bwrsandman/pkgbuild/tree/master/ogremeshy
 
 pkgname=ogremeshy
-pkgver=1.4
-pkgrel=3
+pkgver=1.5
+pkgrel=1
 pkgdesc="A tool for viewing OGRE mesh files"
 arch=('i686' 'x86_64')
 url="http://sourceforge.net/projects/ogremeshy/"
 license=('GPL3')
 
-depends=('ogre>=1.7.3' 'wxgtk>=2.8')
-makedepends=('cmake>=2.6.4')
+depends=('ogre' 'wxgtk')
+makedepends=('cmake')
 
 source=(http://sourceforge.net/projects/$pkgname/files/OgreMeshy.$pkgver.src.tar.bz2
         ogremeshy.desktop) 
-md5sums=('cc6ecf96f19a6f41a90fc3f35707b331'
+md5sums=('53cdaf06dcd70337a4961b9554e3a1c3'
          'a8ec805fc905323d24532d841b442c1c')
 
 prepare() {
   cd "${srcdir}"/OgreMeshy
 
-  # tell OgreMeshy where to find the OGRE plugins
-  sed -i "s/PluginFolder=\/opt\/ogremeshy\/Plugins/PluginFolder=\/usr\/lib\/OGRE/g" bin/Release_Linux/Plugins.cfg
+  cp CMakeLists{.old.1.8,}.txt
+
+  # Tell OgreMeshy where to find the OGRE plugins
+  sed -i "s/PluginFolder=\/opt\/ogremeshy\/Plugins/PluginFolder=\/usr\/lib\/OGRE/g" \
+        bin/Release_Linux/Plugins.cfg
 
   sed -i '58 i \
 	find_package(Boost COMPONENTS system filesystem)' CMakeLists.txt
@@ -31,8 +34,6 @@ prepare() {
 	set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Boost_LIBRARIES})' CMakeLists.txt
   sed -i '107 i \
 	TARGET_LINK_LIBRARIES( OgreMeshy ${OGRE_LIBRARIES} )' CMakeLists.txt
-  sed -i '/^\tm_configDirectory = std::string/a mkdir(m_configDirectory.c_str(), 0755);' \
-        src/Core/wxOgreMeshViewerMainFrameImpl.cpp
 }
 
 build() {
