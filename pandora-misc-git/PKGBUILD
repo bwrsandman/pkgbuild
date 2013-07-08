@@ -39,3 +39,5 @@ package() {
   make INSTALL="$pkgdir/usr/bin" install ${MAKEFLAGS}
   cd "$pkgdir"
 }
+
+# vim:set ts=2 sw=2 et:

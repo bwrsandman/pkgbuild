@@ -44,3 +44,5 @@ package() {
   install -d -m755 "${pkgdir}"/usr/lib
   install -m644 libENet++.a "${pkgdir}"/usr/lib
 }
+
+# vim:set ts=2 sw=2 et:

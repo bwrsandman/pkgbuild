@@ -27,3 +27,5 @@ package() {
   install -d -m755 "$pkgdir"/usr/lib/monodevelop/AddIns/MonoGame
   cp -r MonoDevelop.MonoGame/bin/XamarinRelease/* "$pkgdir"/usr/lib/monodevelop/AddIns/MonoGame
 }
+
+# vim:set ts=2 sw=2 et:

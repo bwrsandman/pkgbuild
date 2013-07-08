@@ -68,3 +68,5 @@ exec ./OgreMeshy \"$@\"" > "$pkgdir/usr/bin/$pkgname"
   install -d "$pkgdir/usr/share/applications"
   cp "$srcdir/ogremeshy.desktop" "$pkgdir/usr/share/applications"
 }
+
+# vim:set ts=2 sw=2 et:

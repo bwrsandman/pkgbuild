@@ -35,3 +35,5 @@ package() {
   install -Dm755 *.dll "$pkgdir/opt/$pkgname"
   install -Dm755 *.dll.config "$pkgdir/opt/$pkgname"
 }
+
+# vim:set ts=2 sw=2 et:
