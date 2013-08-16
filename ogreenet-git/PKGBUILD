@@ -11,7 +11,7 @@ url="https://github.com/bwrsandman/OgreENet"
 license=('GPL3' 'custom')
 
 depends=('ogre' 'enet')
-makedepends=('git' 'cmake')
+makedepends=('git' 'cmake' 'boost')
 conflicts=('ogreenet')
 provides=('ogreenet')
 
