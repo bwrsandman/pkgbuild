@@ -1,0 +1,36 @@
+# Maintainer: Sandy Carter <bwrsandman@gmail.com>
+# PKGBUILD source: https://github.com/bwrsandman/pkgbuild/tree/master/qt5-qhexeditwidget-git
+
+pkgname=qt5-qhexeditwidget-git
+_pkgname=QHexEdit
+pkgver=38.10338df
+pkgrel=1
+pkgdesc="Binary Hex Editor widget for QT."
+arch=('i686' 'x86_64')
+url="https://github.com/bwrsandman/QHexEdit"
+license=('LGPL')
+
+depends=('qt5-base')
+makedepends=()
+
+source=('git://github.com/bwrsandman/QHexEdit')
+sha1sums=('SKIP')
+
+pkgver() {
+  cd "${srcdir}/${_pkgname}"
+  echo $(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+build() {
+  cd "${srcdir}/${_pkgname}"/src
+  qmake-qt5
+  make
+}
+
+package() {
+  cd "${srcdir}/${_pkgname}"/src
+  make INSTALL_ROOT="${pkgdir}" install
+}
+
+# vim:set ts=2 sw=2 et:
+
