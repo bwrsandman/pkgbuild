@@ -2,8 +2,8 @@
 # PKGBUILD source: https://github.com/bwrsandman/pkgbuild/tree/master/openmw
 
 pkgname=openmw
-pkgver=0.26.0
-pkgrel=2
+pkgver=0.27.0
+pkgrel=3
 pkgdesc="An open-source engine reimplementation for the role-playing game Morrowind."
 arch=('i686' 'x86_64')
 url="http://www.openmw.org"
@@ -12,21 +12,19 @@ license=('GPL3' 'MIT' 'custom')
 depends=('openal' 'ogre' 'mygui' 'bullet' 'mpg123' 'libsndfile' 'qt4' 'ffmpeg' 'sdl2' 'unshield')
 makedepends=('cmake' 'boost')
 
-source=("https://openmw.googlecode.com/files/${pkgname}-${pkgver}-source.tar.gz")
-sha1sums=('6a1fdee2dc0040cc90b5382190907002908a2247')
+source=("https://github.com/zinnschlag/openmw/archive/${pkgname}-${pkgver}.tar.gz")
+sha1sums=('382027a2e23b5c9bd8972053ee312ed73903cda4')
 
 build() {
-  cd "${srcdir}"
+  cd "${srcdir}/${pkgname}-${pkgname}-${pkgver}"
   cmake -DCMAKE_INSTALL_PREFIX=/usr \
         -DCMAKE_BUILD_TYPE=Release \
-        -DQT_QMAKE_EXECUTABLE=/usr/bin/qmake-qt4 \
-        -DHAVE_LIBUDEV_H=0
-
+        -DQT_QMAKE_EXECUTABLE=/usr/bin/qmake-qt4
   make
 }
 
 package() {
-  cd "${srcdir}"
+  cd "${srcdir}/${pkgname}-${pkgname}-${pkgver}"
   make DESTDIR="$pkgdir" install
 }
 
