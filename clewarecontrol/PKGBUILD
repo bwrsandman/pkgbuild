@@ -1,0 +1,30 @@
+# Maintainer: Sandy Carter (bwrsandman) <bwrsandman@gmail.com>
+# PKGBUILD source: https://github.com/bwrsandman/pkgbuild/tree/master/clewarecontrol
+
+pkgname=clewarecontrol
+pkgver=2.5
+pkgrel=1
+pkgdesc="Clewarecontrol lets you control the USB-devices made by Cleware GmbH"
+url="http://www.vanheusden.com/clewarecontrol/"
+arch=('i686' 'x86_64' 'armv6h' 'armv7h')
+license=('LGPL')
+
+depends=()
+makedepends=()
+
+source=("http://www.vanheusden.com/clewarecontrol/${pkgname}-${pkgver}.tgz")
+sha256sums=('e3210eb0aa81e3fbac7d032a18e92db88629d443f7e3e5ec08dcf2c3e73aa6a3')
+
+build() {
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  make
+}
+
+package() {
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  mkdir -p "${pkgdir}/usr/bin"
+  mkdir -p "${pkgdir}/usr/share/man/man1/"
+  make DESTDIR="${pkgdir}" install
+}
+
+# vim:set ts=2 sw=2 et:
