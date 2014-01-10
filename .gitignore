@@ -1,5 +1,8 @@
+*.tgz
 *.tar.*
 *.zip
+*~
 pkg/
 src/
 .hg/
+.bzr/
