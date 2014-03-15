@@ -1,0 +1,18 @@
+# Maintainer: Sandy Carter <bwrsandman@gmail.com>
+
+pkgname=sflvault-common
+pkgver=0.8.0
+pkgrel=1
+pkgdesc="SFLvault is a Networked credentials store and authentication manager"
+arch=(i686 x86_64)
+url="http://www.sflvault.org"
+license=('GPL')
+depends=('python2' 'pycrypto')
+
+source=("https://github.com/savoirfairelinux/${pkgname%-common}/archive/v${pkgver}-rc1.tar.gz")
+sha256sums=('497e0f14a07de4d766071bb4aaa060a10baf7c57e509c969bc5f05def0a6869b')
+ 
+package() {
+  cd ${srcdir}/${pkgname%-common}-${pkgver}-rc1/common
+  python2 ./setup.py install --prefix=/usr --root="${pkgdir}" -O1
+}
